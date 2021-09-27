@@ -1,0 +1,14 @@
+auto-save: true
+#interval in second. Default: 900 = 15m
+auto-save-interval: 900
+
+mysql:
+  host: localhost
+  port: 3306
+  database: cache
+  use: root
+  password: ""
+redis:
+  host: localhost
+  port: 6379
+  password: ""

@@ -1,0 +1,5 @@
+name: CacheAPI
+author: BebeDlaStreat
+version: 1.0
+description: CacheAPI is an api to manage data between Redis & MySQL with a key-value system
+main: fr.bebedlastreat.cache.Main
