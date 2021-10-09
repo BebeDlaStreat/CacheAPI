@@ -10,4 +10,9 @@ When you will save data it will first save it on Redis and asynchronously send i
 CacheAPI.set("welcome_message", "Welcome on CacheAPI!");
 System.out.println(CacheAPI.get("welcome_message"));
 ```
+### Save and Get numbers
+```Java
+CacheAPI.set("BebeDlaStreat/solde", String.valueOf(10));
+int solde = Integer.parseInt(CacheAPI.get("BebeDlaStreat/solde"));
+```
 > I will probably add further other database storage like h2 and MongoDB
