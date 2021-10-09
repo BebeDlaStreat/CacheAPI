@@ -4,6 +4,7 @@ import fr.bebedlastreat.cache.commands.DataCommand;
 import fr.bebedlastreat.cache.data.mysql.MySQL;
 import fr.bebedlastreat.cache.data.redis.RedisAccess;
 import org.apache.commons.dbcp2.BasicDataSource;
+import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class Main extends JavaPlugin {
@@ -20,12 +21,20 @@ public class Main extends JavaPlugin {
         RedisAccess.init();
 
         getCommand("data").setExecutor(new DataCommand());
+
+        if (getConfig().getBoolean("auto-save")) {
+            Bukkit.getScheduler().runTaskTimerAsynchronously(this, () -> {
+                RedisAccess.sendToDatabase();
+            }, getConfig().getLong("auto-save-interval"), getConfig().getLong("auto-save-interval"));
+        }
         super.onEnable();
     }
 
     @Override
     public void onDisable() {
-        RedisAccess.sendToDatabase();
+        if (getConfig().getBoolean("save-on-stop")) {
+            RedisAccess.sendToDatabase();
+        }
         RedisAccess.close();
         super.onDisable();
     }
