@@ -1,27 +1,21 @@
 package fr.bebedlastreat.cache.data.redis;
 
-import org.redisson.api.RedissonClient;
-
 public class RedisManager {
-    private static final String PREFIX = "cacheapi_";
+    public static final String PREFIX = "cacheapi/";
 
-    public static boolean keyExist(String key) {
-        RedissonClient redissonClient = RedisAccess.instance.getRedissonClient();
-        return redissonClient.getBucket(PREFIX + key).isExists();
+    public static boolean exist(String key) {
+        return RedisAccess.get().exists(PREFIX + key);
     }
 
-    public static void setKey(String key, Object value) {
-        RedissonClient redissonClient = RedisAccess.instance.getRedissonClient();
-        redissonClient.getBucket(PREFIX + key).set(value);
+    public static void set(String key, String value) {
+        RedisAccess.get().set(PREFIX + key, value);
     }
 
-    public static void removeKey(String key) {
-        RedissonClient redissonClient = RedisAccess.instance.getRedissonClient();
-        redissonClient.getBucket(PREFIX + key).delete();
+    public static void remove(String key) {
+        RedisAccess.get().del(PREFIX + key);
     }
 
-    public static <T> T getKey(String key, Class<T> classOfT) {
-        RedissonClient redissonClient = RedisAccess.instance.getRedissonClient();
-        return (T) redissonClient.getBucket(PREFIX + key).get();
+    public static String get(String key) {
+        return RedisAccess.get().get(PREFIX + key);
     }
 }

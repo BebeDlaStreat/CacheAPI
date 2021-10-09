@@ -1,9 +1,9 @@
 package fr.bebedlastreat.cache;
 
+import fr.bebedlastreat.cache.commands.DataCommand;
 import fr.bebedlastreat.cache.data.mysql.MySQL;
 import fr.bebedlastreat.cache.data.redis.RedisAccess;
 import org.apache.commons.dbcp2.BasicDataSource;
-import org.bukkit.event.EventHandler;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class Main extends JavaPlugin {
@@ -18,6 +18,8 @@ public class Main extends JavaPlugin {
         saveDefaultConfig();
         initConnection();
         RedisAccess.init();
+
+        getCommand("data").setExecutor(new DataCommand());
         super.onEnable();
     }
 

@@ -1,3 +1,9 @@
+#if true, it will send redis cache to databse when plugin disable
+#/!\ Only set to false if you have an bungeecord that can send data. If you are only on a spigot server let it on true because it will never send data to mysql
+save-on-stop: true
+
+#if save-on-stop is false it will automatically be false
+#auto-save is the interval for sending data on the database
 auto-save: true
 #interval in second. Default: 900 = 15m
 auto-save-interval: 900
@@ -6,7 +12,7 @@ mysql:
   host: localhost
   port: 3306
   database: cache
-  use: root
+  user: root
   password: ""
 redis:
   host: localhost

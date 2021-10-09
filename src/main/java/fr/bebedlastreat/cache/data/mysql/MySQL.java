@@ -22,9 +22,7 @@ public class MySQL {
     }
 
     public void createTables() {
-        update("CREATE TABLE IF NOT EXISTS cacheapi (" +
-                "key VARCHAR NOT NULL, " +
-                "value LONGTEXT)");
+        update("CREATE TABLE IF NOT EXISTS cacheapi ( `key` VARCHAR(4095) NOT NULL , `value` LONGTEXT NOT NULL )");
     }
 
     public void update(String qry) {

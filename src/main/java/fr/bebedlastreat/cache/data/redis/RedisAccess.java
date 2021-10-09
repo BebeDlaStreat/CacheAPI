@@ -1,56 +1,46 @@
 package fr.bebedlastreat.cache.data.redis;
 
 import fr.bebedlastreat.cache.Main;
+import fr.bebedlastreat.cache.data.mysql.SQLManager;
 import org.bukkit.configuration.file.FileConfiguration;
-import org.redisson.Redisson;
-import org.redisson.api.RedissonClient;
-import org.redisson.codec.JsonJacksonCodec;
-import org.redisson.config.Config;
-
-import java.util.Iterator;
+import redis.clients.jedis.Jedis;
 
 public class RedisAccess {
-    private RedissonClient redissonClient;
-    public static RedisAccess instance;
+    private Jedis jedis;
+    private static RedisAccess instance;
 
-    public RedissonClient getRedissonClient() {
-        return redissonClient;
+    public Jedis getJedis() {
+        return jedis;
     }
 
-    public RedisAccess(RedisCredentials redisCredentials) {
+    public static RedisAccess getInstance() {
+        return instance;
+    }
+
+    public static Jedis get() {
+        return RedisAccess.getInstance().getJedis();
+    }
+
+    public RedisAccess(String host, String password, int port) {
         instance = this;
-        this.redissonClient = initRedisson(redisCredentials);
+        jedis = new Jedis(host, port);
+        jedis.auth(password);
     }
 
     public static void init() {
         FileConfiguration config = Main.getInstance().getConfig();
-        new RedisAccess(new RedisCredentials(config.getString("redis.host"), config.getString("redis.password"), config.getInt("redis.port")));
+        new RedisAccess(config.getString("redis.host"), config.getString("redis.password"), config.getInt("redis.port"));
     }
 
     public static void close() {
-        RedisAccess.instance.getRedissonClient().shutdown();
+        RedisAccess.instance.getJedis().close();
     }
 
     public static void sendToDatabase() {
-        RedissonClient redissonClient = RedisAccess.instance.getRedissonClient();
-        Iterator<String> iterator = redissonClient.getKeys().getKeys().iterator();
-        while (iterator.hasNext()) {
-            /**
-             * todo save key
-             */
+        Jedis jedis = RedisAccess.get();
+        for (String key : jedis.keys(RedisManager.PREFIX + "*")) {
+            String s = key.substring(RedisManager.PREFIX.length());
+            SQLManager.set(s, RedisManager.get(s));
         }
-    }
-
-    public RedissonClient initRedisson(RedisCredentials redisCredentials) {
-        final Config config = new Config();
-        config.setCodec(new JsonJacksonCodec());
-        config.setThreads(6);
-        config.setNettyThreads(6);
-        config.useSingleServer()
-                .setAddress(redisCredentials.toRedisUrl())
-                .setPassword(redisCredentials.getPassword())
-                .setDatabase(0)
-                .setClientName(redisCredentials.getClientName());
-        return Redisson.create(config);
     }
 }

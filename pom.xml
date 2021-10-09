@@ -40,13 +40,20 @@
 
     <repositories>
         <repository>
-            <id>redisson</id>
-            <url>https://mvnrepository.com/artifact/org.redisson/redisson</url>
+            <id>snapshots-repo</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
         </repository>
+        <!--<repository>
+            <id>jackson-core-asl</id>
+            <url>https://mvnrepository.com/artifact/org.codehaus.jackson/jackson-core-asl</url>
+        </repository>
+        <repository>
+            <id>jackson-mapper-asl</id>
+            <url>https://mvnrepository.com/artifact/org.codehaus.jackson/jackson-mapper-asl</url>
+        </repository>-->
     </repositories>
 
     <dependencies>
-        <!--Spigot API-->
         <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot</artifactId>
@@ -77,10 +84,20 @@
             <version>2.0.1</version>
         </dependency>
         <dependency>
-            <groupId>org.redisson</groupId>
-            <artifactId>redisson</artifactId>
-            <version>3.2.3</version>
+            <groupId>redis.clients</groupId>
+            <artifactId>jedis</artifactId>
+            <version>3.6.0</version>
         </dependency>
+        <!--<dependency>
+            <groupId>org.codehaus.jackson</groupId>
+            <artifactId>jackson-core-asl</artifactId>
+            <version>1.9.13</version>
+        </dependency>
+        <dependency>
+            <groupId>org.codehaus.jackson</groupId>
+            <artifactId>jackson-mapper-asl</artifactId>
+            <version>1.9.13</version>
+        </dependency>-->
     </dependencies>
 
 </project>
