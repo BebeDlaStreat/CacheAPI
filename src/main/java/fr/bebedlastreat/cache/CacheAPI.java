@@ -8,9 +8,9 @@ public class CacheAPI {
 
     public static void set(String key, String value) {
         RedisManager.set(key, value);
-        Bukkit.getScheduler().runTaskAsynchronously(Main.getInstance(), () -> {
+        /*Bukkit.getScheduler().runTaskAsynchronously(Main.getInstance(), () -> {
             SQLManager.set(key, value);
-        });
+        });*/
     }
 
     public static String get(String key) {
