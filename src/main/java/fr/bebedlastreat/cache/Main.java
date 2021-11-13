@@ -18,14 +18,12 @@ public class Main extends JavaPlugin {
         instance = this;
         saveDefaultConfig();
         initConnection();
-        RedisAccess.init();
+        RedisAccess.init(getConfig().getString("redis.host"), getConfig().getString("redis.password"), getConfig().getInt("redis.port"));
 
         getCommand("data").setExecutor(new DataCommand());
 
         if (getConfig().getBoolean("auto-save")) {
-            Bukkit.getScheduler().runTaskTimerAsynchronously(this, () -> {
-                RedisAccess.sendToDatabase();
-            }, getConfig().getLong("auto-save-interval"), getConfig().getLong("auto-save-interval"));
+            Bukkit.getScheduler().runTaskTimerAsynchronously(this, RedisAccess::sendToDatabase, getConfig().getLong("auto-save-interval"), getConfig().getLong("auto-save-interval"));
         }
         super.onEnable();
     }

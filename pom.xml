@@ -88,6 +88,13 @@
             <artifactId>jedis</artifactId>
             <version>3.6.0</version>
         </dependency>
+        <dependency>
+            <groupId>net.md-5</groupId>
+            <artifactId>BungeeCord</artifactId>
+            <version>4.0.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/libs/BungeeCord.jar</systemPath>
+        </dependency>
         <!--<dependency>
             <groupId>org.codehaus.jackson</groupId>
             <artifactId>jackson-core-asl</artifactId>

@@ -27,9 +27,8 @@ public class RedisAccess {
         jedis.auth(password);
     }
 
-    public static void init() {
-        FileConfiguration config = Main.getInstance().getConfig();
-        new RedisAccess(config.getString("redis.host"), config.getString("redis.password"), config.getInt("redis.port"));
+    public static void init(String host, String password, int port) {
+        new RedisAccess(host, password, port);
     }
 
     public static void close() {
