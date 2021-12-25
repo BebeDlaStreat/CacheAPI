@@ -30,7 +30,9 @@ public class CacheAPI {
         if (RedisManager.exist(key)) {
             return RedisManager.get(key);
         } else if (SQLManager.exist(key)) {
-            return SQLManager.get(key);
+            String value = SQLManager.get(key);
+            RedisManager.set(key, value);
+            return value;
         }
         return null;
     }
@@ -39,7 +41,9 @@ public class CacheAPI {
         if (RedisManager.exist(key)) {
             return Integer.parseInt(RedisManager.get(key));
         } else if (SQLManager.exist(key)) {
-            return Integer.parseInt(SQLManager.get(key));
+            int value = Integer.parseInt(SQLManager.get(key));
+            RedisManager.set(key, String.valueOf(value));
+            return value;
         }
         return 0;
     }
@@ -48,7 +52,9 @@ public class CacheAPI {
         if (RedisManager.exist(key)) {
             return Double.parseDouble(RedisManager.get(key));
         } else if (SQLManager.exist(key)) {
-            return Double.parseDouble(SQLManager.get(key));
+            double value = Double.parseDouble(SQLManager.get(key));
+            RedisManager.set(key, String.valueOf(value));
+            return value;
         }
         return 0;
     }
@@ -57,7 +63,9 @@ public class CacheAPI {
         if (RedisManager.exist(key)) {
             return Long.parseLong(RedisManager.get(key));
         } else if (SQLManager.exist(key)) {
-            return Long.parseLong(SQLManager.get(key));
+            long value = Long.parseLong(SQLManager.get(key));
+            RedisManager.set(key, String.valueOf(value));
+            return value;
         }
         return 0;
     }
@@ -66,7 +74,9 @@ public class CacheAPI {
         if (RedisManager.exist(key)) {
             return Float.parseFloat(RedisManager.get(key));
         } else if (SQLManager.exist(key)) {
-            return Float.parseFloat(SQLManager.get(key));
+            float value = Float.parseFloat(SQLManager.get(key));
+            RedisManager.set(key, String.valueOf(value));
+            return value;
         }
         return 0;
     }
