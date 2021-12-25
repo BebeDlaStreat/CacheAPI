@@ -15,5 +15,5 @@ System.out.println(CacheAPI.get("welcome_message"));
 CacheAPI.set("BebeDlaStreat/solde", 10);
 int solde = CacheAPI.getInt("BebeDlaStreat/solde");
 ```
-> I will probably add further other database storage like h2 and MongoDB and add directy Object saving by converting Object to String in json format
-> If you want to implement yourself compatibility with MongoDB or h2 juste fork the project and create pull request
+> I will probably add further other database storage like h2 and MongoDB and add directy Object saving by converting Object to String in json format.
+> If you want to implement yourself compatibility with MongoDB or h2 juste fork the project and create pull request.
