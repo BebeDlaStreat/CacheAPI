@@ -1,8 +1,6 @@
 package fr.bebedlastreat.cache.data.redis;
 
-import fr.bebedlastreat.cache.Main;
 import fr.bebedlastreat.cache.data.mysql.SQLManager;
-import org.bukkit.configuration.file.FileConfiguration;
 import redis.clients.jedis.Jedis;
 
 public class RedisAccess {

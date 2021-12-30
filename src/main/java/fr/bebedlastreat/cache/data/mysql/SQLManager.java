@@ -1,12 +1,8 @@
 package fr.bebedlastreat.cache.data.mysql;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonSyntaxException;
-import fr.bebedlastreat.cache.Bungee;
-import fr.bebedlastreat.cache.Main;
 
 import java.sql.SQLException;
-import java.util.List;
 
 public class SQLManager {
     private static final String TABLE = "cacheapi";
@@ -46,7 +42,6 @@ public class SQLManager {
     }
 
     private static MySQL getMysql() {
-        if (Main.getInstance().getMysql() != null) return Main.getInstance().getMysql();
-        return Bungee.getInstance().getMysql();
+        return MySQL.getInstance();
     }
 }

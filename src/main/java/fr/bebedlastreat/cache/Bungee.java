@@ -11,13 +11,11 @@ import org.apache.commons.dbcp2.BasicDataSource;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.sql.CallableStatement;
 
 public class Bungee extends Plugin {
     private static Bungee instance;
 
     private BasicDataSource connectionPool;
-    private MySQL mysql;
 
     @Override
     public void onEnable() {
@@ -56,8 +54,7 @@ public class Bungee extends Plugin {
         connectionPool.setUrl("jdbc:mysql://" + getConfig().getString("mysql.host") + ":" + getConfig().getString("mysql.port") + "/" + getConfig().getString("mysql.database") + "?autoReconnect=true");
         connectionPool.setInitialSize(1);
         connectionPool.setMaxTotal(10);
-        mysql = new MySQL(connectionPool);
-        mysql.createTables();
+        new MySQL(connectionPool).createTables();
     }
 
     private Configuration getConfig() {
@@ -67,9 +64,5 @@ public class Bungee extends Plugin {
             e.printStackTrace();
         }
         return null;
-    }
-
-    public MySQL getMysql() {
-        return mysql;
     }
 }

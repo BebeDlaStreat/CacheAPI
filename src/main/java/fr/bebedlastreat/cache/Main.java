@@ -11,7 +11,6 @@ public class Main extends JavaPlugin {
     private static Main instance;
 
     private BasicDataSource connectionPool;
-    private MySQL mysql;
 
     @Override
     public void onEnable() {
@@ -45,13 +44,9 @@ public class Main extends JavaPlugin {
         connectionPool.setUrl("jdbc:mysql://" + getConfig().getString("mysql.host") + ":" + getConfig().getString("mysql.port") + "/" + getConfig().getString("mysql.database") + "?autoReconnect=true");
         connectionPool.setInitialSize(1);
         connectionPool.setMaxTotal(10);
-        mysql = new MySQL(connectionPool);
-        mysql.createTables();
+        new MySQL(connectionPool).createTables();
     }
 
-    public MySQL getMysql() {
-        return mysql;
-    }
 
     public static Main getInstance() {
         return instance;

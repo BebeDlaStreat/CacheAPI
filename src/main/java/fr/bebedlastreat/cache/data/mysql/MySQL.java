@@ -12,9 +12,15 @@ import java.util.function.Function;
 public class MySQL {
 
     private BasicDataSource connectionPool;
+    private static MySQL instance;
 
     public MySQL(BasicDataSource connectionPool) {
         this.connectionPool = connectionPool;
+        instance = this;
+    }
+
+    public static MySQL getInstance() {
+        return instance;
     }
 
     public Connection getConnection() throws SQLException {

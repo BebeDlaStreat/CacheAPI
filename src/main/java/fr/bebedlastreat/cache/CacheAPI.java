@@ -2,7 +2,6 @@ package fr.bebedlastreat.cache;
 
 import fr.bebedlastreat.cache.data.mysql.SQLManager;
 import fr.bebedlastreat.cache.data.redis.RedisManager;
-import org.bukkit.Bukkit;
 
 public class CacheAPI {
 
@@ -88,6 +87,5 @@ public class CacheAPI {
 
     public static void remove(String key) {
         RedisManager.remove(key);
-        Bukkit.getScheduler().runTaskAsynchronously(Main.getInstance(), () -> SQLManager.remove(key));
     }
 }
